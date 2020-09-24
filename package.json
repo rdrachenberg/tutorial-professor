@@ -1,0 +1,23 @@
+{
+    "name": "tutorial-professor",
+    "description": "empowering you to learn new skills that will change your life",
+    "authors": "Ryan Drachenberg",
+    "version": "1.0.1",
+    "main": "pathToMain",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "bcryptjs": "^2.4.3",
+        "cookie-parser": "^1.4.5",
+        "express": "^4.17.1",
+        "express-handlebars": "^3.1.0",
+        "express-validator": "^6.6.1",
+        "handlebars": "^4.7.6",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^3.6.2",
+        "mongoose": "^5.10.6",
+        "uniqid": "^5.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}
