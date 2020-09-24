@@ -8,6 +8,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const db = mongoose.connection;
+const models = require('../models');
 
 module.exports = (app) => {
 // ================================================================================    
@@ -18,7 +20,14 @@ module.exports = (app) => {
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 2500,
     });
-
+    // Set up error log for mongoose error
+    db.on('error', function (err) {
+        console.log("MONGOOSE ERROR: ", err);
+    });
+    // Set up successful Mongoose Connnection log
+    db.once('open', function () {
+        console.log("Mongoose Connection Successful. ");
+    });
 // ================================================================================
 //************** Setup the view engine **************//
 // ================================================================================
@@ -48,3 +57,16 @@ module.exports = (app) => {
 // ================================================================================
     app.use(express.static(path.join(__dirname, '../static')));
 };
+
+// Seed Database
+models.User.create({
+    username: "Tester McFly",
+    password: "tester@gmail.com",
+
+})
+.then(function (dbUser) {
+    console.log(dbUser);
+})
+.catch(function (err) {
+    console.log(err.message);
+}); 
