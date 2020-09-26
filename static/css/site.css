@@ -38,3 +38,8 @@
     text-decoration: underline;
     box-shadow: 0 5px 10px #cccccc;
 }
+
+img#sadFaceImg {
+    display: block;
+    margin: 0 auto;
+}

@@ -2,7 +2,7 @@ const {ObjectId} = require('bson');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// const Cube = require('./Cube');
+const Course = require('./Course');
 
 
 const userSchema = new mongoose.Schema({
@@ -24,6 +24,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    creatorId: [{type: mongoose.Schema.Types.ObjectId, ref: 'Course'}],
+
 });
 
 userSchema.pre('save', function (next) {

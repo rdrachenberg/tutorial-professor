@@ -10,6 +10,9 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const db = mongoose.connection;
 const models = require('../models');
+// const session = require("express-session");
+const passport = require("passport");
+const logger = require("morgan");
 
 module.exports = (app) => {
 // ================================================================================    
@@ -56,17 +59,38 @@ module.exports = (app) => {
 //************** Setup the static files **************//
 // ================================================================================
     app.use(express.static(path.join(__dirname, '../static')));
+
+// ================================================================================
+//************** Setup & initialize passport **************//
+// ================================================================================
+    app.use(passport.initialize());
+    // Start passport session
+    app.use(passport.session());
+
+// ================================================================================
+//************** Setup & initialize morgan logger **************//
+// ================================================================================
+    // Set up logger
+    app.use(logger('dev'));
+    // app.use(
+    //     session({
+    //         secret: process.env.SECRET,
+    //         resave: true,
+    //         saveUninitialized: true
+    //     })
+    // );
 };
 
-// Seed Database
-models.User.create({
-    username: "Tester McFly",
-    password: "tester@gmail.com",
 
-})
-.then(function (dbUser) {
-    console.log(dbUser);
-})
-.catch(function (err) {
-    console.log(err.message);
-}); 
+// Seed Database
+// models.User.create({
+//     username: "Tester McFly",
+//     password: "tester@gmail.com",
+
+// })
+// .then(function (dbUser) {
+//     console.log(dbUser);
+// })
+// .catch(function (err) {
+//     console.log(err.message);
+// }); 

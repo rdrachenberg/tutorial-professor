@@ -1,11 +1,26 @@
-// require models if need be 
+// ==============================================================================
+//* DEPENDENCIES *
+// ==============================================================================
 let user = require('../models/User');
-
-console.log(user);
-
+let courses = require('../models/Course')
+// let username = this.user; // <<<<<<< not working
+// let loggedIn = true;
 module.exports = (req, res) => {
     res.status(200);
-    res.render('index', {
-        layout: 'main'
+
+    courses.find({}).then(courses => {
+        console.log(courses);
+        res.render('index', {
+            courses: courses[0],
+            username: user.token,
+            layout: 'main'
+        });
     });
+    // res.render('index', {
+    //     // loggedIn: loggedIn,
+    //     courses: courses,
+    //     username: user.token,
+    //     layout: 'main'
+    // });
+    // console.log( username + ' <<<<<<<< username');
 };
