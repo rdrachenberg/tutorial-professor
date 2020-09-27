@@ -13,6 +13,11 @@ const models = require('../models');
 // const session = require("express-session");
 const passport = require("passport");
 const logger = require("morgan");
+const { config } = require('dotenv');
+const dotenv = require('dotenv');
+let loggedIn = require('./config').loggedIn;
+// let secret = process.env.SECRET;
+
 
 module.exports = (app) => {
 // ================================================================================    
@@ -68,17 +73,50 @@ module.exports = (app) => {
     app.use(passport.session());
 
 // ================================================================================
+//***** Setup custom middleware for jwt cookie verification and storage *****//
+// ================================================================================
+    // Set up logger
+    app.use((req, res, next) => {
+        let token = req.cookies.token;
+        // let login = req.login;
+        let secret = process.env.SECRET;
+        if(token == 'jwt expired'){
+            next();
+        }
+        if (loggedIn) {
+            if(token == undefined){
+                loggedIn = false;
+            } else {
+                
+                // console.log(secret);
+                decodedToken = jwt.verify(token, secret);
+                // console.log(decodedToken);
+                if(decodedToken.username == undefined){
+                    loggedIn = false;
+                }
+            }
+        } else {
+            if (token != undefined && token != null && token != '') {
+                decodedToken = jwt.verify(token, secret);
+                    console.log(decodedToken.username + ' this decoded');
+                    if (decodedToken.username != undefined && decodedToken.username != null) {
+                        loggedIn = true;
+                        username = decodedToken.username;
+                    }
+
+            }
+        }
+        req.login = loggedIn;
+        // req.username = username;
+
+        next();
+    });
+// ================================================================================
 //************** Setup & initialize morgan logger **************//
 // ================================================================================
     // Set up logger
     app.use(logger('dev'));
-    // app.use(
-    //     session({
-    //         secret: process.env.SECRET,
-    //         resave: true,
-    //         saveUninitialized: true
-    //     })
-    // );
+    
 };
 
 
@@ -94,3 +132,81 @@ module.exports = (app) => {
 // .catch(function (err) {
 //     console.log(err.message);
 // }); 
+
+/*
+<!-- seed
+<
+div class = "container mt-3" >
+    <
+    div class = "row " >
+    <
+    div class = "card-deck d-flex justify-content-center" >
+
+    <
+    div class = "card mb-4" >
+    <
+    img class = "card-img-top"
+src = "https://blog.cyberpanel.net/wp-content/uploads/2019/03/express-js-cyberpanel.jpeg"
+alt = "Card image cap"
+width = "400" >
+    <
+    div class = "card-body" >
+    <
+    h4 class = "card-title" > ExpressJS < /h4> <
+    /div> <
+    div class = "card-footer" >
+    <
+    a href = "/details/{{id}}" > < button type = "button"
+class = "btn btn-info" > Details < /button></a >
+    <
+    small class = "float-right" > Date... < /small> <
+    /div> <
+    /div>
+
+    <
+    div class = "card mb-4" >
+    <
+    img class = "card-img-top"
+src = "https://colorlib.com/wp/wp-content/uploads/sites/2/angular-logo.png"
+alt = "Card image cap"
+width = "400" >
+    <
+    div class = "card-body" >
+    <
+    h4 class = "card-title" > Angular < /h4> <
+    /div> <
+    div class = "card-footer" >
+    <
+    a href = "" > < button type = "button"
+class = "btn btn-info" > Details < /button></a >
+    <
+    small class = "float-right" > Date... < /small> <
+    /div> <
+    /div>
+
+    <
+    div class = "card mb-4" >
+    <
+    img class = "card-img-top"
+src = "http://blog.addthiscdn.com/wp-content/uploads/2014/11/addthis-react-flux-javascript-scaling.png"
+alt = "Card image cap"
+width = "400" >
+    <
+    div class = "card-body" >
+    <
+    h4 class = "card-title" > React < /h4> <
+    /div> <
+    div class = "card-footer" >
+    <
+    a href = "" > < button type = "button"
+class = "btn btn-info" > Details < /button></a >
+    <
+    small class = "float-right" > Date... < /small> <
+    /div> <
+    /div> <
+    /div> <
+    /div> <
+    /div> <
+    h3 class = "text-center" > No courses... < /h3>
+-->
+*/

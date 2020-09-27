@@ -17,6 +17,11 @@ let createControllerData = require('../controllers/create.js').data;
 let detailsControllerRoute = require('../controllers/details.js').route;
 let detailsControllerData = require('../controllers/details.js').data;
 
+let loggedIn = require('./config').loggedIn;
+let secret = require('./config').secret;
+
+const { check, validationResult } = require('express-validator');
+const { config } = require('./config');
 // ==============================================================================
 //* ALL ROUTING & EXPORT MODULE *
 // ==============================================================================
@@ -33,8 +38,52 @@ module.exports = (app) => {
     app.get('/register', (req, res) => {
         userControllerRoute(req, res);
     });
-    app.post('/register', (req, res) => {
-        userControllerData(req, res);
+    app.post('/register', [
+        check('username')
+        .trim()
+        .isString()
+        .isLength({
+            min: 1
+        })
+        .withMessage('UserName must be filled in'),
+        check('password')
+            .trim()
+            .isString()
+            .isLength({
+                min: 1
+            })
+            .withMessage('password must be filled in'),
+        check('repeatPassword')
+            .trim()
+            .isString()
+            .isLength({
+                min: 1
+            })
+            .withMessage('repeat password must be filled in'),
+    ], (req, res) => {
+        const errors = validationResult(req);
+        let {password, repeatPassword} = req.body;
+        if (!errors.isEmpty()) {
+            res.status(422);
+
+            registerRoute(req, res, {
+                message: 'validation err, the entered info is incorrect',
+                errors: errs.array()
+            });
+        } else if (password != repeatPassword) {
+            res.status(422);
+            registerRoute(req, res, {
+                message: 'validation error, entered info is incorrect',
+                errors: [{
+                    value: [password, repeatPassword],
+                    msg: 'password and reapeatePassword must be the same',
+                    params: ['password', 'repeatPassword'],
+                    location: 'body'
+                }]
+            });
+        } else {
+            userControllerData(req, res);
+        }
     });
 // ==============================================================================
 //************ Login Routes ************\\
@@ -42,8 +91,31 @@ module.exports = (app) => {
     app.get('/login', (req, res) => {
         loginControllerRoute(req, res);
     });
-    app.post('/login', (req, res) => {
-        loginControllerData(req, res);
+    app.post('/login', [
+        check('username')
+            .trim()
+            .isString()
+            .isLength({min:1})
+            .withMessage('UserName must be filled in'),
+        check('password')
+            .trim()
+            .isString()
+            .isLength({min:1})
+            .withMessage('password must be filled in'),
+    ], (req, res) => {
+        const errors = validationResult(req);
+        // let {username, password} = req.body;
+        if(!errors.isEmpty()) {
+            res.status(422);
+
+            loginControllerRoute(req, res, {
+                message: 'validation err, the entered info is incorrect',
+                errors: errs.array()
+            });
+        } else {
+            loginControllerData(req, res);
+        }
+        
     });
 // ==============================================================================
 //************ Create Course Routes ************\\
@@ -64,6 +136,15 @@ module.exports = (app) => {
     app.post('/details/:id', (req, res) => {
         detailsControllerData(req, res);
     });
+// ==============================================================================
+//************ Logout Route ************\\
+// ==============================================================================
+    app.get('/logout', (req, res) => {
+        loggedIn = false;
+        res.clearCookie('token');
+        res.redirect('/');
+    });
+    
 
 
 

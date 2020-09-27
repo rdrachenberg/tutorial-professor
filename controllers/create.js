@@ -3,13 +3,23 @@
 // ==============================================================================
 let user = require('../models/User');
 let Course = require('../models/Course');
+let jwt = require('jsonwebtoken');
 
 module.exports = {
     route: (req, res) => {
+        if (req.cookies.token != undefined && req.cookies.token != null) {
+            let token = req.cookies.token;
+            let secret = process.env.SECRET;
+            decodedToken = jwt.verify(token, secret);
+            // console.log(decodedToken.username);
+            username = decodedToken.username;
+        } else {
+            username = null;
+        }
         res.status(200);
         res.render('create', {
-        // loggedIn: loggedIn,
-        // username: user.token,
+        loggedIn: req.login,
+        username: username,
         layout: 'main'
         });
     },
@@ -39,7 +49,7 @@ module.exports = {
 
         Course.find({}).then(courses => {
             console.log(courses);
-            res.redirect('/')
+            res.redirect('/');
         });
         
         // console.log(res);

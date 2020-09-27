@@ -7,7 +7,7 @@ module.exports = {
     route: (req, res) => {
         res.status(200);
         res.render('login', {
-            username: user.username,
+            loggedIn: req.loggedIn,
             layout: 'main'
         });
         console.log(username + ' <<<<<<<< username');
