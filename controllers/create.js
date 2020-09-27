@@ -1,9 +1,10 @@
 // ==============================================================================
 //* DEPENDENCIES *
 // ==============================================================================
-let user = require('../models/User');
+let User = require('../models/User');
 let Course = require('../models/Course');
 let jwt = require('jsonwebtoken');
+// let secret = require('../config/config').secret; // not working?!
 
 module.exports = {
     route: (req, res) => {
@@ -25,30 +26,39 @@ module.exports = {
     },
 
     data: (req, res) => {
-        let newCourse = {
-            title: req.body.title,
-            description: req.body.description,
-            imageUrl: req.body.imageUrl,
-            isPublic: req.body.isPublic,
+        
+        let secret = process.env.SECRET;
+        let decodedToken = jwt.verify(req.cookies.token, secret);
+        console.log(decodedToken);
+        User.findById(decodedToken.id).then((user) => {
+            let newCourse = {
+                title: req.body.title,
+                description: req.body.description,
+                imageUrl: req.body.imageUrl,
+                isPublic: req.body.isPublic,
+                creatorId: user,
 
-        };
+            };
 
-        if(newCourse.isPublic === undefined){}
-        newCourse.isPublic = true;
+            if (newCourse.isPublic === undefined) {}
+            newCourse.isPublic = true;
 
-        new Course(newCourse).save()
-        .then((course) => {
-            console.log(course);
-            // res.redirect('/');
-        }).catch(err => {
-            if(err){
-                console.log(err._message);
-                return;
-            }
+            new Course(newCourse).save()
+            .then((course) => {
+                console.log(course);
+                // res.redirect('/');
+            }).catch(err => {
+                if(err){
+                    res.status(400);
+                    console.log(err._message);
+                    return;
+                }
+            });
+
         });
 
         Course.find({}).then(courses => {
-            console.log(courses);
+            // console.log(courses);
             res.redirect('/');
         });
         

@@ -2,12 +2,8 @@
 //* DEPENDENCIES *
 // ==============================================================================
 let User = require('../models/User');
-
 let bcrypt = require('bcryptjs');
 let jwt = require('jsonwebtoken');
-// let cookieparser = require('cookie-parser');
-// let config = require('../config/config');
-// let dotenv = require('dotenv');
 
 module.exports = {
 
@@ -23,12 +19,21 @@ module.exports = {
         let username = req.body.username;
         let password = req.body.password;
 
+        User.find({username:username}).then((userFound) =>{
+            if(userFound.length > 0){
+                res.status(400);
+                console.log(userFound);
+                console.log('User already registered, please login');
+                res.redirect('/login');
+                return;
+            }
+        });
+
         new User({
             username: username,
             password: password, 
         }).save()
             .then(function (newUser) {
-                
                 console.log(newUser);
                 User.find({username:newUser.username}).then((newUser) => {
                     console.log(newUser);
@@ -68,6 +73,7 @@ module.exports = {
                 });
             })
                 .catch(err => {
+                res.status(400);
                 console.log(err);
             });
     }
