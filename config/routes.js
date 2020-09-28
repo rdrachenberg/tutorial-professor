@@ -22,6 +22,8 @@ let secret = require('./config').secret;
 
 const { check, validationResult } = require('express-validator');
 const { config } = require('./config');
+const { decode } = require('punycode');
+const jwt = require('jsonwebtoken');
 // ==============================================================================
 //* ALL ROUTING & EXPORT MODULE *
 // ==============================================================================
@@ -128,14 +130,27 @@ module.exports = (app) => {
     });
 
 // ==============================================================================
-//************ Create Course Routes ************\\
+//************ Details Course Routes ************\\
 // ==============================================================================
     app.get('/details/:id', (req, res) => {
+        let secret = process.env.SECRET;
+        if(loggedIn){
+            decodedToken = jwt.verify(req.cookies.token, secret);
+            console.log(decodedToken._id);
+//! ******************* Problem here ... need to figue out why *******************//
+            req.id = decodedToken._id;
+            if (decodedToken.id == null || decodedToken.id == undefined){
+                req.id = decodedToken._id;
+            } else {
+                req.id = decodedToken.id;
+            }
+//! *****************************************************************************//
+        }
         detailsControllerRoute(req, res);
     });
-    app.post('/details/:id', (req, res) => {
-        detailsControllerData(req, res);
-    });
+    // app.post('/details/:id', (req, res) => {
+    //     detailsControllerData(req, res);
+    // });
 // ==============================================================================
 //************ Logout Route ************\\
 // ==============================================================================

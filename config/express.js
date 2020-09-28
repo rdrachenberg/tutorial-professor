@@ -75,7 +75,6 @@ module.exports = (app) => {
 // ================================================================================
 //***** Setup custom middleware for jwt cookie verification and storage *****//
 // ================================================================================
-    // Set up logger
     app.use((req, res, next) => {
         let token = req.cookies.token;
         // let login = req.login;
@@ -89,7 +88,15 @@ module.exports = (app) => {
             } else {
                 
                 // console.log(secret);
-                decodedToken = jwt.verify(token, secret);
+                if (token != undefined && token != null && token != '') {
+                    decodedToken = jwt.verify(token, secret);
+                    // console.log(decodedToken.username + ' this decoded');
+                    if (decodedToken.username != undefined && decodedToken.username != null) {
+                        loggedIn = true;
+                        username = decodedToken.username;
+                    }
+
+                }
                 // console.log(decodedToken);
                 if(decodedToken.username == undefined){
                     loggedIn = false;

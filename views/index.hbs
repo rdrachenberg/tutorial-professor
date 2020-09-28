@@ -13,6 +13,7 @@
             <input type="submit" class="btn btn-info" value="Search">
         </form>
     </section>
+    {{#if loggedIn}}
     {{#if courses}}
     <div class="container mt-3">
         <div class="row ">
@@ -36,5 +37,25 @@
     </div>
     {{else}}
         <h3 class="text-center">No courses...</h3>
+    {{/if}}
+    {{else}}
+        {{#if courses}}
+        <div class="container mt-3">
+            <div class="row ">
+                <div class="card-deck d-flex justify-content-center">
+                    {{#each courses}}
+                    <div class="card mb-4">
+                        <img class="card-img-top" src="{{imageUrl}}" alt="Card image cap" width="400">
+                        <div class="card-body">
+                            <h4 class="card-title">{{title}}</h4>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{else}}
+            <h3 class="text-center">No courses...</h3>
+        {{/if}}
     {{/if}}
 </main>

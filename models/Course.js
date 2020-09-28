@@ -3,7 +3,6 @@ const courseSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         auto: true,
-        // ref: 'Cube'
     },
 
     title: {
@@ -27,7 +26,9 @@ const courseSchema = new mongoose.Schema({
         required: false,
         default: false, 
     },
-    creatorId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    creatorId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    createdAt: [{type: Date, defalt: Date.now}],
+    usersEnrolled: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     
 });
 module.exports = Course = mongoose.model('Course', courseSchema);

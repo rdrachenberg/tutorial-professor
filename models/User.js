@@ -6,12 +6,6 @@ const saltRounds = 10;
 
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        auto: true,
-        // ref: 'Cube'
-    },
-
     username: {
         type: String,
         required: true,
@@ -24,6 +18,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
+    isEnrolled: [{type: mongoose.Schema.Types.ObjectId, ref: 'Course'}]
 });
 
 userSchema.pre('save', function (next) {

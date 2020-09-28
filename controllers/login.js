@@ -26,7 +26,7 @@ module.exports = {
                 res.status(400);
                 console.log('username is incorect'); 
             } else {
-                console.log(user);
+                console.log(user + " This is the user from login\n");
                 bcrypt.compare(password, user.password, (err, result) => {
                     if(err){
                         res.status(500);
@@ -40,7 +40,8 @@ module.exports = {
                             username:user.username,
                             _id:user._id,
                         };
-                        const token = jwt.sign(userData, process.env.SECRET, {expiresIn:'1h'});
+                        
+                        const token = jwt.sign({username:user.username, _id: user._id}, process.env.SECRET, {expiresIn:'1h'});
                         res.cookie('token', token);
                         res.redirect('/');
                     }

@@ -34,26 +34,27 @@ module.exports = {
             password: password, 
         }).save()
             .then(function (newUser) {
-                console.log(newUser);
+                // console.log(newUser);
                 User.find({username:newUser.username}).then((newUser) => {
-                    console.log(newUser);
+                    // console.log(newUser);
                     if(newUser.length == 0){
                         console.log('signup error');
                         res.status(500);
                         res.redirect('/register');
                     } else {
-                        bcrypt.compare(req.body.password, newUser[0].password, function (err, result) {
+                        let passTwo = newUser[0].password;
+                        bcrypt.compare(password, passTwo, function (err, result) {
                             if (result) {
-                                console.log(result + ' result = hash compare');
+                                // console.log(result + ' result = hash compare');
                                 // console.log(newUser[0].username);
-                                const token = jwt.sign({
-                                    username: newUser[0].username,
-                                    id: newUser[0]._id
-                                }, process.env.SECRET, {
+                                let newUserName = newUser[0].username;
+                                let newUserId = newUser[0]._id;
+
+                                const token = jwt.sign({username: newUserName, _id: newUserId}, 
+                                    process.env.SECRET, {
                                     expiresIn: '1h'
                                 });
-                                console.log(token + ' <<<< is token!');
-
+                                // console.log(token + ' <<<< is token!');
                                 res.cookie('token', token);
                                 // Need to add success message to front end UX
                                 res.redirect('/');

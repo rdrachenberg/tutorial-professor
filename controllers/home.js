@@ -5,8 +5,6 @@ let user = require('../models/User');
 let courses = require('../models/Course');
 let jwt = require('jsonwebtoken');
 
-// let username = this.user; // <<<<<<< not working
-// let loggedIn = true;
 module.exports = (req, res) => {
     res.status(200);
 
@@ -19,25 +17,20 @@ module.exports = (req, res) => {
             let token = req.cookies.token;
             let secret = process.env.SECRET;
             decodedToken = jwt.verify(token, secret);
-            // console.log(decodedToken.username);
+            // console.log(decodedToken);
             username = decodedToken.username;
+            req.id = decodedToken._id;
+            // console.log(req.id);
         } else {
             username = null;
         }
-        
 
         res.render('index', {
             courses: course,
             loggedIn: req.login,
             username: username,
+            _id: req.id,
             layout: 'main'
         });
     });
-    // res.render('index', {
-    //     // loggedIn: loggedIn,
-    //     courses: courses,
-    //     username: user.token,
-    //     layout: 'main'
-    // });
-    // console.log( username + ' <<<<<<<< username');
 };
