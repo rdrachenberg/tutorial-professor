@@ -29,10 +29,10 @@ module.exports = {
         
         let secret = process.env.SECRET;
         let decodedToken = jwt.verify(req.cookies.token, secret);
-        console.log(decodedToken);
+        // console.log(decodedToken);
         let date = new Date();
         User.findById(decodedToken.id || decodedToken._id).then((user) => {
-            console.log(user);
+            // console.log(user);
             let newCourse = {
                 title: req.body.title,
                 description: req.body.description,
@@ -55,7 +55,7 @@ module.exports = {
             new Course(newCourse).populate('creatorId').populate('usersEnrolled').save()
             .then((course) => {
                 console.log(course);
-                // res.redirect('/');
+                res.redirect('/');
             }).catch(err => {
                 if(err){
                     res.status(400);
@@ -65,18 +65,10 @@ module.exports = {
             });
 
         });
-
-        Course.find({}).then(courses => {
-            // console.log(courses);
-            res.redirect('/');
-        });
-        
         // console.log(res);
         // console.log(description);
         // console.log(imageUrl);
         // console.log(isPublic);
         // console.log(newCourse);
-
-    }
-    
+    }    
 };

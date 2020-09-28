@@ -105,7 +105,7 @@ module.exports = (app) => {
         } else {
             if (token != undefined && token != null && token != '') {
                 decodedToken = jwt.verify(token, secret);
-                    console.log(decodedToken.username + ' this decoded');
+                    // console.log(decodedToken.username + ' this decoded');
                     if (decodedToken.username != undefined && decodedToken.username != null) {
                         loggedIn = true;
                         username = decodedToken.username;

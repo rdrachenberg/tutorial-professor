@@ -136,15 +136,13 @@ module.exports = (app) => {
         let secret = process.env.SECRET;
         if(loggedIn){
             decodedToken = jwt.verify(req.cookies.token, secret);
-            console.log(decodedToken._id);
-//! ******************* Problem here ... need to figue out why *******************//
+            // console.log(decodedToken._id);
             req.id = decodedToken._id;
             if (decodedToken.id == null || decodedToken.id == undefined){
                 req.id = decodedToken._id;
             } else {
                 req.id = decodedToken.id;
             }
-//! *****************************************************************************//
         }
         detailsControllerRoute(req, res);
     });
