@@ -79,7 +79,9 @@ module.exports = (app) => {
         let token = req.cookies.token;
         // let login = req.login;
         let secret = process.env.SECRET;
+
         if(token == 'jwt expired'){
+            res.redirect('/');
             next();
         }
         if (loggedIn) {
@@ -110,12 +112,13 @@ module.exports = (app) => {
                         loggedIn = true;
                         username = decodedToken.username;
                     }
-
             }
         }
         req.login = loggedIn;
-        // req.username = username;
 
+        if(loggedIn){
+            req.username = username;
+        }
         next();
     });
 // ================================================================================
@@ -142,6 +145,20 @@ module.exports = (app) => {
 
 /*
 <!-- seed
+let expToken = jwt.decode(token, secret).exp;
+
+let validJwt = jwt.verify(token, secret, {clockTimestamp: new Date().getTime()}, (result) => {
+
+    return result;
+});
+
+console.log(validJwt);
+
+if(expToken > validJwt){
+    console.log('expired token');
+
+    res.redirect('/login');
+}
 <
 div class = "container mt-3" >
     <

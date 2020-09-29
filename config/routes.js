@@ -17,6 +17,11 @@ let createControllerData = require('../controllers/create.js').data;
 let detailsControllerRoute = require('../controllers/details.js').route;
 let detailsControllerData = require('../controllers/details.js').data;
 
+let editControllerRoute = require('../controllers/edit.js').route;
+let editControllerData = require('../controllers/edit.js').data;
+
+let deleteControllerData = require('../controllers/delete.js');
+
 let loggedIn = require('./config').loggedIn;
 let secret = require('./config').secret;
 
@@ -146,9 +151,46 @@ module.exports = (app) => {
         }
         detailsControllerRoute(req, res);
     });
-    // app.post('/details/:id', (req, res) => {
-    //     detailsControllerData(req, res);
-    // });
+// ==============================================================================
+//************ Edit Course Routes ************\\
+// ==============================================================================
+    app.get('/edit/:id', (req, res) => {
+        let secret = process.env.SECRET;
+        if(loggedIn){
+            decodedToken = jwt.verify(req.cookies.token, secret);
+            // console.log(decodedToken._id);
+            req.id = decodedToken._id;
+            if (decodedToken.id == null || decodedToken.id == undefined){
+                req.id = decodedToken._id;
+            } else {
+                req.id = decodedToken.id;
+            }
+        }
+        editControllerRoute(req, res);
+    });
+
+    app.post('/edit/:id', (req, res) => {
+        if(loggedIn){
+            let secret = process.env.SECRET;
+            decodedToken = jwt.decode(req.cookies.token, secret);
+            req.id = decodedToken._id;
+            editControllerData(req, res);
+        }
+
+    });
+    
+// ==============================================================================
+//************ Delete Route ************\\
+// ==============================================================================
+    app.get('/delete/:id', (req, res) => {
+        if(loggedIn){
+            let secret = process.env.SECRET;
+            decodedToken = jwt.decode(req.cookies.token, secret);
+            req.id = decodedToken._id;
+            deleteControllerData(req, res);
+        }
+        
+    });
 // ==============================================================================
 //************ Logout Route ************\\
 // ==============================================================================
