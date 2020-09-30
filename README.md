@@ -23,7 +23,7 @@ A online experience that will empower you to change your life through acquisitio
         <img src='https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg'>
     </a>
     <a href='mailto:RyanDrachenberg@gmail.com'>
-        <img src='https://img.shields.io/badge/Built%20by-Developers-informational
+        <img src='https://img.shields.io/badge/Built%20by-Developers-informational.svg  
 '>
     </a>
 </p>
