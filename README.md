@@ -1,6 +1,6 @@
 # Tutorial Professor
 <p align='center'>
-    <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'> A online experience that will empower you to change your life through acquisition of additional skills!  <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'>
+    <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'> A online experience that will empower you to change your life through the acquisition of additional skills!  <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'>
 </p>
 
 <p align='center'>
