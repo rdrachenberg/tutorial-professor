@@ -23,10 +23,10 @@
         <img src='https://img.shields.io/badge/Made%20by-rDrachenberg-success?style=plastic&logo=visual-studio-code&logoColor=blue'>
     </a>
     <a href='mailto:RyanDrachenberg@gmail.com'>
-        <img src='https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg'>
+        <img src='https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg?logo=minutemailer&logoColor=#29B99B'>
     </a> 
-    <img src='https://img.shields.io/github/license/rdrachenberg/tutorial-professor?logo=MIT'
- 
+    <img src='https://img.shields.io/github/license/rdrachenberg/tutorial-professor?logo=MIT&style=plastic'>
+    <img src='https://img.shields.io/github/package-json/v/rdrachenberg/tutorial-professor?logo=visual-studio-code&logoColor=red&style=plastic'>
 </p>
 
 ## Node Required
