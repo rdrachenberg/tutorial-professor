@@ -1,5 +1,8 @@
 # Tutorial Professor
-A online experience that will empower you to change your life through acquisition of additional skills!
+<p align='center'>
+    <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'> A online experience that will empower you to change your life through acquisition of additional skills!  <img width='15px' src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/devbadge.gif'>
+</p>
+
 <p align='center'>
     <a href='https://github.com/rdrachenberg/tutorial-professor/blob/master/index.js'>
         <img src='https://img.shields.io/badge/JavaScript-79.84%25-brightgreen?style=plastic&logo=javascript'>
@@ -21,11 +24,7 @@ A online experience that will empower you to change your life through acquisitio
     </a>
     <a href='mailto:RyanDrachenberg@gmail.com'>
         <img src='https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg'>
-    </a>
-    <a href='mailto:RyanDrachenberg@gmail.com'>
-        <img src='https://img.shields.io/badge/Built%20by-Developers-informational.svg  
-'>
-    </a>
+    </a>  
 </p>
 
 ## Node Required
