@@ -22,9 +22,7 @@ module.exports = (req, res) => {
                 console.log(err);
             }).then(course => {
                 console.log(course);
-                setTimeout(() => {
                     res.redirect('/');
-                }, 2000);
         });
         
     });
