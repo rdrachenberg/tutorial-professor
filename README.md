@@ -5,10 +5,13 @@ A online experience that will empower you to change your life through acquisitio
         <img src='https://img.shields.io/badge/JavaScript-79.84%25-brightgreen?style=plastic&logo=javascript'>
     </a>
     <a href='https://github.com/rdrachenberg/tutorial-professor/tree/master/views'>
-        <img src='https://img.shields.io/badge/Handlebars-18.9-yellowgreen?style=plastic&logo=HackerRank&logoColor=yellow'>
+        <img src='https://img.shields.io/badge/Handlebars-18.9%25-yellowgreen?style=plastic&logo=HackerRank&logoColor=yellow'>
     </a>
     <a href='https://github.com/rdrachenberg/tutorial-professor/tree/master/static/css'>
-        <img src='https://img.shields.io/badge/CSS-1.3%25-purple?style=plascit&logo=CSS3&logoColor=blue'>
+        <img src='https://img.shields.io/badge/CSS-1.3%25-yellowgreen?style=plascit&logo=CSS3&logoColor=blue'>
+    </a>
+    <a href='https://github.com/rdrachenberg'>
+        <img src='https://img.shields.io/badge/Database%20-MongoDB-success?style=plastic&logo=mongoDB&logoColor=success'>
     </a>
     <a href='https://github.com/rdrachenberg'>
         <img src='https://img.shields.io/badge/Node%20-.js-success?style=plastic&logo=Node.js&logoColor=success'>
@@ -19,9 +22,10 @@ A online experience that will empower you to change your life through acquisitio
     <a href='mailto:RyanDrachenberg@gmail.com'>
         <img src='https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg'>
     </a>
-</p>
-<p align='center'>
-    <img src='https://forthebadge.com/images/badges/powered-by-electricity.svg'>
+    <a href='mailto:RyanDrachenberg@gmail.com'>
+        <img src='https://img.shields.io/badge/Built%20by-Developers-informational
+'>
+    </a>
 </p>
 
 ## Node Required
