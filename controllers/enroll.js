@@ -7,16 +7,19 @@ let jwt = require('jsonwebtoken');
 
 module.exports = (req, res) => {
     let id = req.params.id;
+    console.log(id);
 
-    Courses.findById(id).populate('usersEnrolled').then(course =>{
+    Courses.findByIdAndUpdate(id,  {'$push': {'usersEnrolled': req.id}}).populate('usersEnrolled').then(course =>{
         
         console.log(course);
         // let objId = {_id: , isEnrolled: true};
-        course.usersEnrolled.push(req.id);
-
-        Users.findById(req.id).populate('isEnrolled').then(user => {
-            let courseObj = {_id: id, isEnrolled: true};
-            user.isEnrolled.push(courseObj);
+        // course.usersEnrolled = {
+            
+        // }; 
+        
+        Users.findByIdAndUpdate(req.id, {'$push': {'isEnrolled': course._id}}).populate('isEnrolled').then(user => {
+            // let courseObj = {_id: id, isEnrolled: true};
+            // user.isEnrolled.push(courseObj);
             console.log(user);
             isEnrolled = true;
             console.log(course);

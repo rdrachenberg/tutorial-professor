@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     route: (req, res) => {
         let id = req.params.id;
-        console.log(id);
+        // console.log(id);
 
         if (req.cookies.token != undefined && req.cookies.token != null) {
             let token = req.cookies.token;
@@ -24,7 +24,7 @@ module.exports = {
             // // console.log(course);
             // // console.log(req.id);
             // // console.log(course)
-            console.log(course);
+            // console.log(course);
             
             if(req.id == undefined){
                 req.id = req._id;
@@ -44,6 +44,13 @@ module.exports = {
             } else {
                 isEnrolled = false;
             }
+            console.log(course.usersEnrolled);
+            course.usersEnrolled.forEach(element => {
+                if(element == req.id){
+                    isEnrolled = true;
+                    console.log(isEnrolled);
+                }
+            });
             
             // console.log(isOwned);
             res.status(200);
