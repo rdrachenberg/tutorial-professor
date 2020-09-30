@@ -2,18 +2,21 @@
     <form class="text-center border border-light p-5" action="/register" method="POST">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Username" name="username" value="">
+            <input type="text" class="form-control" placeholder="Username" name="username" value="" id="register-username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="password" value="">
+            <input type="password" class="form-control" placeholder="Password" name="password" value="" id="register-password">
         </div>
 
         <div class="form-group">
             <label for="repeatPassword">Repeat Password</label>
-            <input type="password" class="form-control" placeholder="Repeat-Password" name="repeatPassword" value="">
+            <input type="password" class="form-control" placeholder="Repeat-Password" name="repeatPassword" value="" id="register-repeat-password">
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary" id="register-button">Register</button>
     </form>
 </main>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./notify.min.js"></script>
+<script type="text/javascript" src="./index.js"></script>

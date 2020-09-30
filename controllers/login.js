@@ -38,7 +38,11 @@ module.exports = {
                         const token = jwt.sign({username:user.username, _id: user._id}, process.env.SECRET, {expiresIn:'1h'});
                         
                         res.cookie('token', token);
-                        res.redirect('/');
+                        
+                        setTimeout(() => {
+                            res.redirect('/');
+                        }, 1300);
+                        
                     }
                 });
             }

@@ -4,6 +4,8 @@
 let User = require('../models/User');
 let bcrypt = require('bcryptjs');
 let jwt = require('jsonwebtoken');
+let $ = require('jquery');
+let notify = require('../lib/notify.min.js');
 
 module.exports = {
 
@@ -45,6 +47,7 @@ module.exports = {
                         let passTwo = newUser[0].password;
                         bcrypt.compare(password, passTwo, function (err, result) {
                             if (result) {
+                                this.loggedIn = true;
                                 // console.log(result + ' result = hash compare');
                                 // console.log(newUser[0].username);
                                 let newUserName = newUser[0].username;
@@ -57,7 +60,14 @@ module.exports = {
                                 // console.log(token + ' <<<< is token!');
                                 res.cookie('token', token);
                                 // Need to add success message to front end UX
-                                res.redirect('/');
+                                setTimeout(() => {
+                                    res.redirect('/');
+                                }, 1500);
+                                    
+                                
+                                
+                                
+                                
 
                             } else {
                                 res.json({

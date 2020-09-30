@@ -1,9 +1,12 @@
 let Course = require('../models/Course');
+let Users = require('../models/User');
 const jwt = require('jsonwebtoken');
+
 
 module.exports = {
     route: (req, res) => {
         let id = req.params.id;
+        console.log(id);
 
         if (req.cookies.token != undefined && req.cookies.token != null) {
             let token = req.cookies.token;
@@ -18,20 +21,17 @@ module.exports = {
         Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').then((course) => {
             let isOwned = false;
             let isEnrolled = false;
-            // console.log(course);
-            // console.log(req.id);
-            // console.log(course)
+            // // console.log(course);
+            // // console.log(req.id);
+            // // console.log(course)
+            console.log(course);
             
-
-
             if(req.id == undefined){
                 req.id = req._id;
             }
-            // console.log(req._id);
-
+            // // console.log(req._id);
             let creatorId = course.creatorId[0]._id;
-            // console.log(creatorId);
-
+            // // console.log(creatorId);
             if(req.id == creatorId){
                 isOwned = true;
                 
@@ -39,7 +39,7 @@ module.exports = {
                 isOwned = false;
             }
 
-            if(req.id == course.usersEnrolled[0]._id){
+            if (req.id == creatorId) {
                 isEnrolled = true;
             } else {
                 isEnrolled = false;
@@ -55,7 +55,9 @@ module.exports = {
                 isEnrolled: isEnrolled,
                 layout: 'main'
             });
+        }).catch(err => {
+            console.log(err);
+            return;
         });
-
     }
 };

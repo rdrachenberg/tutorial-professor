@@ -21,9 +21,12 @@ let editControllerRoute = require('../controllers/edit.js').route;
 let editControllerData = require('../controllers/edit.js').data;
 
 let deleteControllerData = require('../controllers/delete.js');
+let enrollControllerData = require('../controllers/enroll');
 
 let loggedIn = require('./config').loggedIn;
 let secret = require('./config').secret;
+
+
 
 const { check, validationResult } = require('express-validator');
 const { config } = require('./config');
@@ -50,21 +53,21 @@ module.exports = (app) => {
         .trim()
         .isString()
         .isLength({
-            min: 1
+            min: 5
         })
         .withMessage('UserName must be filled in'),
         check('password')
             .trim()
             .isString()
             .isLength({
-                min: 1
+                min: 5
             })
             .withMessage('password must be filled in'),
         check('repeatPassword')
             .trim()
             .isString()
             .isLength({
-                min: 1
+                min: 5
             })
             .withMessage('repeat password must be filled in'),
     ], (req, res) => {
@@ -73,13 +76,13 @@ module.exports = (app) => {
         if (!errors.isEmpty()) {
             res.status(422);
 
-            registerRoute(req, res, {
+            userControllerRoute(req, res, {
                 message: 'validation err, the entered info is incorrect',
                 errors: errs.array()
             });
         } else if (password != repeatPassword) {
             res.status(422);
-            registerRoute(req, res, {
+            userControllerRoute(req, res, {
                 message: 'validation error, entered info is incorrect',
                 errors: [{
                     value: [password, repeatPassword],
@@ -130,7 +133,39 @@ module.exports = (app) => {
     app.get('/course/create', (req, res) => {
         createControllerRoute(req, res);
     });
-    app.post('/course/create', (req, res) => {
+    app.post('/course/create', [
+        check('title')
+        .trim()
+        .isString()
+        .isLength({
+            min: 4
+        })
+        .withMessage('Title must be filled in'),
+        check('description')
+        .trim()
+        .isString()
+        .isLength({
+            min: 20,
+            max: 50,
+        })
+        .withMessage('description must be filled in'),
+        check('imageUrl')
+        .trim()
+        .isString()
+        .isLength({
+            min: 7,
+        })
+        .isURL()
+        .withMessage('imageUrl must be valid must be filled in'),
+        check("imageUrl").notEmpty().custom(value => {
+            if (/^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/.test(value)) {
+                throw new Error('Please make sure you add in an image (ends in .png, .jpg, .jpeg, .gif).');
+            }
+            // Indicates the success of this synchronous custom validator
+            return true;
+        }),
+    ], (req, res) => {
+
         createControllerData(req, res);
     });
 
@@ -176,7 +211,6 @@ module.exports = (app) => {
             req.id = decodedToken._id;
             editControllerData(req, res);
         }
-
     });
     
 // ==============================================================================
@@ -192,12 +226,28 @@ module.exports = (app) => {
         
     });
 // ==============================================================================
+//************ Enroll Route ************\\
+// ==============================================================================
+    app.get('/enroll/:id', (req, res) => {
+        if(loggedIn){
+            let secret = process.env.SECRET;
+            decodedToken = jwt.decode(req.cookies.token, secret);
+            req.id = decodedToken._id;
+            enrollControllerData(req, res);
+        }
+        
+    });
+// ==============================================================================
 //************ Logout Route ************\\
 // ==============================================================================
     app.get('/logout', (req, res) => {
+        
         loggedIn = false;
         res.clearCookie('token');
-        res.redirect('/');
+        setTimeout(() => {
+            res.redirect('/');
+        }, 1300);
+        
     });
     
 

@@ -17,10 +17,15 @@ module.exports = (req, res) => {
         {
             '$pull': {'isEnrolled':course._id},
             
-        }).then(course => {
-            console.log(course);
-            res.redirect('/');
+        }).catch(err => {
+                console.log('Failed to delete:');
+                console.log(err);
+            }).then(course => {
+                console.log(course);
+                setTimeout(() => {
+                    res.redirect('/');
+                }, 2000);
         });
-        //* STOPPED HERE **********************************
+        
     });
 };

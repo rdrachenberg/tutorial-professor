@@ -14,13 +14,13 @@
                 <p>{{course.description}}</p>
                 {{#if loggedIn}}
                     {{#if isOwned}}
-                        <a class="btn btn-danger" href="/delete/{{course._id}}">Delete</a>
+                        <a class="btn btn-danger" href="/delete/{{course._id}}" id="delete-button">Delete</a>
                         <a class="btn btn-warning" href="/edit/{{course._id}}">Edit</a>
                     {{else}}
                         {{#if isEnrolled}}
                             <span class="enrolled-span">You are already enrolled</span>
                         {{else}}
-                            <a class="btn btn-primary" href="/">Enroll</a>
+                            <a class="btn btn-primary" href="/enroll/{{course._id}}">Enroll</a>
                         {{/if}}
                     {{/if}}
                 {{/if}}
@@ -29,3 +29,6 @@
         </div>
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="../notify.min.js"></script>
+<script type="text/javascript" src="../index.js"></script>

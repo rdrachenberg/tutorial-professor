@@ -28,11 +28,11 @@ module.exports = {
     data: (req, res) => {
         
         let secret = process.env.SECRET;
-        let decodedToken = jwt.verify(req.cookies.token, secret);
-        // console.log(decodedToken);
+        let decodedToken = jwt.decode(req.cookies.token, secret);
+        console.log(decodedToken);
         let date = new Date();
-        User.findById(decodedToken.id || decodedToken._id).then((user) => {
-            // console.log(user);
+        User.findById(decodedToken._id).then((user) => {
+            console.log(user);
             let newCourse = {
                 title: req.body.title,
                 description: req.body.description,
@@ -55,7 +55,11 @@ module.exports = {
             new Course(newCourse).populate('creatorId').populate('usersEnrolled').save()
             .then((course) => {
                 console.log(course);
-                res.redirect('/');
+                setTimeout(() => {
+                    res.redirect('/');
+                }, 1000);
+                    
+
             }).catch(err => {
                 if(err){
                     res.status(400);
