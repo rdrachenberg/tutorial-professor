@@ -13,5 +13,10 @@
 // // If the user is not enrolled in the course, you should display Enroll button.
 // // else it should show already enrolled 
 //**************************************************************************************************************
-//TODO FIGURE OUT- why loggedIn var is not being passed correctly to the enroll route from details route *****
+// // FIGURE OUT- why loggedIn var is not being passed correctly to the enroll route from details route *****
+// // config/routes.js 232
+//**************************************************************************************************************
+
+//**************************************************************************************************************
+// // FIGURE OUT- delete is not working now *****
 //**************************************************************************************************************

@@ -229,13 +229,14 @@ module.exports = (app) => {
 //************ Enroll Route ************\\
 // ==============================================================================
     app.get('/enroll/:id', (req, res) => {
-        //? I dont know why my loggedIn var isnt registering as 'true' below
-        // if(loggedIn){ //? *************************************************
+        loggedIn = req.login;
+        
+        if (loggedIn) { 
             let secret = process.env.SECRET;
             decodedToken = jwt.decode(req.cookies.token, secret);
             req.id = decodedToken._id;
             enrollControllerData(req, res);
-        // }
+        }
         
     });
 // ==============================================================================

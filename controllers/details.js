@@ -1,13 +1,14 @@
 let Course = require('../models/Course');
 let Users = require('../models/User');
 const jwt = require('jsonwebtoken');
-let { loggedIn } = require('../config/config');
+let { loggedIn } = require('../config/config').loggedIn;
 
 
 module.exports = {
     route: (req, res) => {
         let id = req.params.id;
         // console.log(id);
+        console.log(req.login)
 
         if (req.cookies.token != undefined && req.cookies.token != null) {
             let token = req.cookies.token;
@@ -23,7 +24,7 @@ module.exports = {
         Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').then((course) => {
             let isOwned = false;
             let isEnrolled = false;
-            req.loggedIn = true;
+            req.login = true;
             // // console.log(course);
             // // console.log(req.id);
             // // console.log(course)
