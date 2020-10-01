@@ -14,7 +14,7 @@
         <img src='https://img.shields.io/badge/CSS-1.3%25-blue?style=plascit&logo=CSS3&logoColor=green'>
     </a>
     <a href='https://github.com/rdrachenberg'>
-        <img src='https://img.shields.io/badge/Database%20-MongoDB-blue?style=plastic&logo=mongoDB&logoColor=success'>
+        <img src='https://img.shields.io/badge/Mongo%20-DB-blue?style=plastic&logo=mongoDB&logoColor=success'>
     </a>
     <a href='https://github.com/rdrachenberg'>
         <img src='https://img.shields.io/badge/Node%20-.js-success?style=plastic&logo=Node.js&logoColor=success'>
