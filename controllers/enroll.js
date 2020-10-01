@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         // console.log(course.usersEnrolled);
     // });
     
-    Courses.findByIdAndUpdate(id,  {'$push': {'usersEnrolled': req.id}}).populate('usersEnrolled').exec().then(course =>{
+    Courses.findByIdAndUpdate(id,  {'$push': {'usersEnrolled': req.id}}).populate('usersEnrolled').then(course =>{
         
         console.log(course);
         // let objId = {_id: , isEnrolled: true};
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
             
         // }; 
         
-        Users.findByIdAndUpdate(req.id, {'$push': {'isEnrolled': course._id}}).populate('isEnrolled').exec().then(user => {
+        Users.findByIdAndUpdate(req.id, {'$push': {'isEnrolled': course._id}}).populate('isEnrolled').then(user => {
             // let courseObj = {_id: id, isEnrolled: true};
             // user.isEnrolled.push(courseObj);
             console.log(user);
@@ -30,9 +30,9 @@ module.exports = (req, res) => {
             // console.log(course);
             setTimeout(() => {
                 res.redirect('/details/' + id);
-            }, 200);
+            }, 750);
             
-        }).save().catch(err => {
+        }).catch(err => {
             console.log(err);
         });
     });

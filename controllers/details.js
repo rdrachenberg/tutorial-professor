@@ -16,11 +16,11 @@ module.exports = {
             // console.log(decodedToken);
             username = decodedToken.username;
             req.id = decodedToken._id;
-            req.loggedIn = true;
+            loggedIn = true;
         } else {
             username = null;
         }
-        Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').exec().then((course) => {
+        Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').then((course) => {
             let isOwned = false;
             let isEnrolled = false;
             req.loggedIn = true;
@@ -41,7 +41,7 @@ module.exports = {
             } else {
                 isOwned = false;
             }
-            let i;
+            
             let length = course.usersEnrolled.length;
 
             for (let i = 0; i < length; i++){
@@ -53,7 +53,7 @@ module.exports = {
                 }
             }
 
-            console.log(isEnrolled);
+            // console.log(isEnrolled);
 
             // console.log(isOwned);
             res.status(200);

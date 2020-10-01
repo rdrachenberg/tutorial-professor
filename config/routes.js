@@ -235,6 +235,9 @@ module.exports = (app) => {
             req.id = decodedToken._id;
             enrollControllerData(req, res);
         }else {
+            let secret = process.env.SECRET;
+            decodedToken = jwt.decode(req.cookies.token, secret);
+            req.id = decodedToken._id;
             enrollControllerData(req, res);
         }
         
