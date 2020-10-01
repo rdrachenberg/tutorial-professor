@@ -1,6 +1,7 @@
 let Course = require('../models/Course');
 let Users = require('../models/User');
 const jwt = require('jsonwebtoken');
+let { loggedIn } = require('../config/config');
 
 
 module.exports = {
@@ -15,12 +16,14 @@ module.exports = {
             // console.log(decodedToken);
             username = decodedToken.username;
             req.id = decodedToken._id;
+            req.loggedIn = true;
         } else {
             username = null;
         }
-        Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').then((course) => {
+        Course.findById(id).lean().populate('creatorId').populate('usersEnrolled').exec().then((course) => {
             let isOwned = false;
             let isEnrolled = false;
+            req.loggedIn = true;
             // // console.log(course);
             // // console.log(req.id);
             // // console.log(course)
@@ -38,20 +41,20 @@ module.exports = {
             } else {
                 isOwned = false;
             }
+            let i;
+            let length = course.usersEnrolled.length;
 
-            if (req.id == creatorId) {
-                isEnrolled = true;
-            } else {
-                isEnrolled = false;
-            }
-            console.log(course.usersEnrolled);
-            course.usersEnrolled.forEach(element => {
-                if(element == req.id){
+            for (let i = 0; i < length; i++){
+                let enrolled = course.usersEnrolled[i]._id;
+                // console.log(enrolled);
+                // console.log(req.id);
+                if(enrolled == req.id){
                     isEnrolled = true;
-                    console.log(isEnrolled);
                 }
-            });
-            
+            }
+
+            console.log(isEnrolled);
+
             // console.log(isOwned);
             res.status(200);
             res.render('details', {

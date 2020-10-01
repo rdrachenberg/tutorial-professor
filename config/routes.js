@@ -234,6 +234,8 @@ module.exports = (app) => {
             decodedToken = jwt.decode(req.cookies.token, secret);
             req.id = decodedToken._id;
             enrollControllerData(req, res);
+        }else {
+            enrollControllerData(req, res);
         }
         
     });
