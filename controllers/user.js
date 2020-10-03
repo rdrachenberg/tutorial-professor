@@ -4,11 +4,8 @@
 let User = require('../models/User');
 let bcrypt = require('bcryptjs');
 let jwt = require('jsonwebtoken');
-let $ = require('jquery');
-let notify = require('../lib/notify.min.js');
 
 module.exports = {
-
     route: (req, res) => {
         res.status(200);
         res.render('register', {
