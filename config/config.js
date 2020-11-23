@@ -6,5 +6,5 @@ module.exports = {
     },
     production: {},
     secret: process.env.SECRET,
-    loggedIn: true
+    loggedIn: false
 };
