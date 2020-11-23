@@ -23,7 +23,7 @@ module.exports = (app) => {
 // ================================================================================    
 //************** Mongoose Connect Setup **************//
 // ================================================================================
-    mongoose.connect("mongodb://localhost:27017/students" || process.env.MONGOURI , {
+    mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/students", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 2500,
