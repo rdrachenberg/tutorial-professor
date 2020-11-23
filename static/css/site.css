@@ -43,3 +43,38 @@ img#sadFaceImg {
     display: block;
     margin: 0 auto;
 }
+#login-img{
+    max-width: 50%;
+    margin-left: 25%;
+    margin-top: 2%;
+    border-radius: 15px;
+}
+
+#login-username {
+    max-width: 50%;
+    margin-left: 25%;
+}
+#login-password{
+    max-width: 50%;
+    margin-left: 25%;
+}
+#register-username {
+    max-width: 50%;
+    margin-left: 25%;
+}
+#register-password{
+    max-width: 50%;
+    margin-left: 25%;
+}
+#register-repeat-password {
+    max-width: 50%;
+    margin-left: 25%;
+}
+
+#signup-img{
+    max-width: 50%;
+    margin-left: 25%;
+    margin-top: 2%;
+    border-radius: 15px;
+}
+
