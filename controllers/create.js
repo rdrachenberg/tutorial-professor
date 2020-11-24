@@ -4,7 +4,7 @@
 let User = require('../models/User');
 let Course = require('../models/Course');
 let jwt = require('jsonwebtoken');
-// let secret = require('../config/config').secret; // not working?!
+let secret = require('../config/config').secret; // not working?!
 
 module.exports = {
     route: (req, res) => {

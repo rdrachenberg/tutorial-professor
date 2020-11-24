@@ -32,7 +32,7 @@ $(document).ready(function () {
     $('#register-password').on('change', (result) => {
         let registerPassword = document.getElementById('register-password').value;
         // console.log(result);
-        checkUser(registerPassword.length < 5, 'Password Must Be 5 Characters or Longer', 'Password meets requirements', '#register-password')
+        checkUser(registerPassword.length < 5, 'Password Must Be 5 Characters or Longer', 'Password meets requirements', '#register-password');
         
     });
     
