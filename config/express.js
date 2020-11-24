@@ -14,7 +14,7 @@ const models = require('../models');
 const passport = require("passport");
 const logger = require("morgan");
 const { config } = require('dotenv');
-const dotenv = require('dotenv');
+require('dotenv').config();
 let loggedIn = require('./config').loggedIn;
 // let secret = process.env.SECRET;
 
