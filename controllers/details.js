@@ -1,7 +1,7 @@
 let Course = require('../models/Course');
 let Users = require('../models/User');
 const jwt = require('jsonwebtoken');
-let { loggedIn } = require('../config/config').loggedIn;
+let loggedIn = require('../config/config').loggedIn;
 
 
 module.exports = {
