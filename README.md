@@ -30,13 +30,20 @@
     </a>
 </p>
 
-## Node Required
-**********************************************************
-### Run 
+
+## [Deployed to Heroku Here]('https://tutorial-professor.herokuapp.com/')
+*********************
+
+## Run Locally
+
+### Node Required
+### Clone then run 
     npm i
 
 ### Create in Root 
     touch .env
+    needed variables:
+    SECRET
 <br>
 
 ## Tutorial Professor
