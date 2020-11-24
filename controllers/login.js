@@ -5,6 +5,7 @@ let User = require('../models/User');
 let config = require('../config/config');
 let bcrypt = require('bcryptjs');
 let jwt = require('jsonwebtoken');
+require('dotenv').config();
 // let username = this.user;
 module.exports = {
     route: (req, res) => {
