@@ -31,7 +31,7 @@
 </p>
 
 
-## [Deployed to Heroku Here]('https://tutorial-professor.herokuapp.com/')
+## [Deployed to Heroku Here](https://tutorial-professor.herokuapp.com/)
 *********************
 
 ## Run Locally
