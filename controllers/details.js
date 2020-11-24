@@ -8,7 +8,7 @@ module.exports = {
     route: (req, res) => {
         let id = req.params.id;
         // console.log(id);
-        console.log(req.login)
+        console.log(req.login);
 
         if (req.cookies.token != undefined && req.cookies.token != null) {
             let token = req.cookies.token;

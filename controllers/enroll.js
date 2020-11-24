@@ -4,7 +4,7 @@
 let Users = require('../models/User');
 let Courses = require('../models/Course');
 let jwt = require('jsonwebtoken');
-let { loggedIn } = require('../config/config').loggedIn;
+let loggedIn  = require('../config/config').loggedIn;
 
 module.exports = (req, res) => {
     let id = req.params.id;
