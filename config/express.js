@@ -36,6 +36,10 @@ module.exports = (app) => {
     db.once('open', function () {
         console.log("Mongoose Connection Successful. ");
     });
+    db.listen(process.env.PORT, function () {
+        console.log(`🌎  ==> API Server now listening on port ${process.env.PORT}!  🌎`);
+        });
+
     
 // ================================================================================
 //************** Setup the view engine **************//
@@ -122,11 +126,6 @@ module.exports = (app) => {
         if(loggedIn){
             req.username = username;
         }
-
-        app.listen(config.port, function () {
-        console.log(`🌎  ==> API Server now listening on port ${config.port}!  🌎`);
-        });
-        
         next();
     });
 // ================================================================================
