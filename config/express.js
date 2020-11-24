@@ -71,6 +71,7 @@ module.exports = (app) => {
     app.use(express.static(path.join(__dirname, '../static')));
     app.use(express.static(path.join(__dirname, '../scripts')));
     app.use(express.static(path.join(__dirname, '../lib')));
+    app.use(express.static('static'));
 
 // ================================================================================
 //************** Setup & initialize passport **************//
